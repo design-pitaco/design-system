@@ -26,12 +26,10 @@ export default function TabBar({ tabs, activeTab, onTabChange }: TabBarProps) {
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
             style={{
+              position: "relative",
               background: "none",
               border: "none",
-              borderBottom: isActive ? "2px solid" : "2px solid transparent",
-              borderImage: isActive
-                ? "linear-gradient(to right, var(--border-gradient-01), var(--border-gradient-02)) 1"
-                : "none",
+              borderBottom: "2px solid transparent",
               outline: "none",
               cursor: "pointer",
               padding: "var(--spacing-12) var(--spacing-24)",
@@ -44,6 +42,18 @@ export default function TabBar({ tabs, activeTab, onTabChange }: TabBarProps) {
             }}
           >
             {tab.label}
+            {isActive && (
+              <span
+                style={{
+                  position: "absolute",
+                  bottom: -1,
+                  left: "var(--spacing-24)",
+                  right: "var(--spacing-24)",
+                  height: 2,
+                  background: "linear-gradient(to right, var(--border-gradient-01), var(--border-gradient-02))",
+                }}
+              />
+            )}
           </button>
         );
       })}
