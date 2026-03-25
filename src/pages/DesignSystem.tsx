@@ -115,7 +115,7 @@ const BUTTON_DEFS = [
    Structure only — values come from CSS at runtime.
    ========================================================== */
 
-const FONT_SIZE_STEPS = ["80", "72", "64", "56", "48", "40", "32", "24", "20", "16", "14", "12", "10", "8"];
+const FONT_SIZE_STEPS = ["80", "72", "64", "56", "48", "40", "32", "28", "24", "20", "16", "14", "12", "10", "8"];
 
 const WEIGHT_DEFS = [
   { step: "regular", label: "Regular" },
