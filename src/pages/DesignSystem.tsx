@@ -62,6 +62,8 @@ const LAYER_DEFS = [
   { token: "$layer-04", role: "Fundo de destaque sobre o $background." },
   { token: "$layer-gradient-01", role: "Gradiente de camada sobre o $background." },
   { token: "$layer-gradient-02", role: "Gradiente de camada sobre o $background." },
+  { token: "$layer-gradient-03", role: "Gradiente secundario de camada." },
+  { token: "$layer-gradient-04", role: "Gradiente secundario de camada." },
 ];
 
 const BORDER_DEFS = [
@@ -139,7 +141,7 @@ const LINE_HEIGHT_DEFS = [
    Structure only — values come from CSS at runtime.
    ========================================================== */
 
-const SPACING_STEPS = ["2", "4", "8", "12", "16", "20", "24", "32", "40", "48", "56", "64", "80", "96", "120", "160"];
+const SPACING_STEPS = ["2", "4", "8", "12", "16", "20", "24", "28", "32", "40", "48", "56", "64", "80", "96", "120", "160"];
 
 /* ==========================================================
    TAB CONTENT COMPONENTS

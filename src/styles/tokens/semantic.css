@@ -23,6 +23,8 @@
   --layer-04: var(--orange-500);
   --layer-gradient-01: var(--brand-purple-400);
   --layer-gradient-02: var(--brand-violet-400);
+  --layer-gradient-03: var(--orange-500);
+  --layer-gradient-04: var(--pink-500);
 
   /* Border */
   --border-01: var(--lightdark-25);
@@ -87,6 +89,8 @@
   --layer-04: var(--orange-300);
   --layer-gradient-01: var(--brand-purple-400);
   --layer-gradient-02: var(--brand-violet-400);
+  --layer-gradient-03: var(--orange-300);
+  --layer-gradient-04: var(--pink-300);
 
   /* Border */
   --border-01: var(--lightdark-800);
