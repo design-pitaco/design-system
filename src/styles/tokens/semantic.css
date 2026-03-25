@@ -42,7 +42,8 @@
   /* Button */
   --button-primary-gradient-01: var(--brand-purple-400);
   --button-primary-gradient-02: var(--brand-violet-400);
-  --button-secondary: var(--green-300);
+  --button-secondary-gradient-01: var(--orange-500);
+  --button-secondary-gradient-02: var(--pink-500);
   --button-odds-01: var(--lightdark-0);
   --button-odds-02: var(--lightdark-25);
   --button-odds-selected-01: var(--lime-300);
@@ -105,7 +106,8 @@
   /* Button */
   --button-primary-gradient-01: var(--brand-purple-400);
   --button-primary-gradient-02: var(--brand-violet-400);
-  --button-secondary: var(--green-300);
+  --button-secondary-gradient-01: var(--orange-300);
+  --button-secondary-gradient-02: var(--pink-300);
   --button-odds-01: var(--lightdark-800);
   --button-odds-02: var(--lightdark-700);
   --button-odds-selected-01: var(--lime-300);

@@ -102,7 +102,8 @@ const FEEDBACK_DEFS = [
 const BUTTON_DEFS = [
   { token: "$button-primary-gradient-01", role: "Cor do botao primario." },
   { token: "$button-primary-gradient-02", role: "Cor do botao primario." },
-  { token: "$button-secondary", role: "Cor do botao secundario." },
+  { token: "$button-secondary-gradient-01", role: "Cor do botao secundario." },
+  { token: "$button-secondary-gradient-02", role: "Cor do botao secundario." },
   { token: "$button-odds-01", role: "Cor do botao de odds." },
   { token: "$button-odds-02", role: "Cor do botao de odds." },
   { token: "$button-odds-selected-01", role: "Cor selecionada do $button-odds." },
