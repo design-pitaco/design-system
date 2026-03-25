@@ -29,6 +29,13 @@ function Preview({ color }: { color: string }) {
   return <div style={{ ...styles.preview, backgroundColor: color }} />;
 }
 
+function parseColorMix(value: string): { hex: string; pct: string } | null {
+  const m = value.match(
+    /color-mix\(in\s+srgb,\s*(#[A-Fa-f0-9]{6,8})\s+(\d+)%,\s*transparent\)/i,
+  );
+  return m ? { hex: m[1], pct: m[2] } : null;
+}
+
 function ValueCell({
   value,
   scaleMap,
@@ -36,6 +43,21 @@ function ValueCell({
   value: string;
   scaleMap?: Record<string, string>;
 }) {
+  const mix = parseColorMix(value);
+
+  if (mix) {
+    const primitiveName = scaleMap?.[mix.hex.toUpperCase()] ?? null;
+    const varRef = primitiveName ? `var(--${primitiveName})` : mix.hex;
+    return (
+      <div style={styles.valueCol}>
+        <span style={styles.valueHex}>{mix.hex}</span>
+        <span style={styles.valueRef}>
+          {`color-mix(in srgb,\n${varRef} ${mix.pct}%,transparent);`}
+        </span>
+      </div>
+    );
+  }
+
   const ref = scaleMap?.[value.toUpperCase()] ?? null;
   return (
     <div style={styles.valueCol}>
@@ -88,12 +110,13 @@ export default function TokenTable({ title, tokens, scaleMap }: TokenTableProps)
                 width: 48,
                 flexShrink: 0,
                 justifyContent: "center",
+                alignItems: "flex-start",
                 paddingRight: 0,
               }}
             >
               <Preview color={t.lightValue} />
             </div>
-            <div style={{ ...styles.cell, width: 150, flexShrink: 0, paddingLeft: "var(--spacing-8)" }}>
+            <div style={{ ...styles.cell, width: 150, flexShrink: 0, paddingLeft: "var(--spacing-8)", alignItems: "flex-start" }}>
               <ValueCell value={t.lightValue} scaleMap={scaleMap} />
             </div>
             <div
@@ -102,12 +125,13 @@ export default function TokenTable({ title, tokens, scaleMap }: TokenTableProps)
                 width: 48,
                 flexShrink: 0,
                 justifyContent: "center",
+                alignItems: "flex-start",
                 paddingRight: 0,
               }}
             >
               <Preview color={t.darkValue} />
             </div>
-            <div style={{ ...styles.cell, width: 150, flexShrink: 0, paddingLeft: "var(--spacing-8)" }}>
+            <div style={{ ...styles.cell, width: 150, flexShrink: 0, paddingLeft: "var(--spacing-8)", alignItems: "flex-start" }}>
               <ValueCell value={t.darkValue} scaleMap={scaleMap} />
             </div>
           </div>
@@ -184,7 +208,7 @@ const styles: Record<string, CSSProperties> = {
     fontSize: "var(--font-size-10)",
     color: "var(--text-02)",
     opacity: 0.7,
-    whiteSpace: "nowrap" as const,
+    whiteSpace: "pre-wrap" as const,
   },
   preview: {
     width: 32,

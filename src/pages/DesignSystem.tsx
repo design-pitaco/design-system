@@ -36,6 +36,8 @@ const PRIMITIVE_STEPS: Record<string, string[]> = {
   "blue": ["25", "50", "100", "200", "300", "400", "500", "600", "700", "800", "900"],
   "lime": ["100", "200", "300", "400", "500"],
   "cyan": ["100", "200", "300", "400", "500"],
+  "orange": ["100", "200", "300", "400", "500"],
+  "pink": ["100", "200", "300", "400", "500"],
 };
 
 /* ==========================================================
@@ -66,7 +68,6 @@ const BORDER_DEFS = [
   { token: "$border-01", role: "Cor de borda ou divisor." },
   { token: "$border-02", role: "Cor de borda ou divisor." },
   { token: "$border-03", role: "Cor de borda ou divisor." },
-  { token: "$border-active", role: "Cor ativa para todas as bordas." },
   { token: "$border-gradient-01", role: "Gradiente de borda ou divisor." },
   { token: "$border-gradient-02", role: "Gradiente de borda ou divisor." },
 ];
@@ -74,11 +75,28 @@ const BORDER_DEFS = [
 const TEXT_DEFS = [
   { token: "$text-01", role: "Cor primaria de texto." },
   { token: "$text-02", role: "Cor secundaria de texto." },
-  { token: "$text-03", role: "Cor de destaque (sucesso)." },
-  { token: "$text-04", role: "Cor de destaque (alerta)." },
+  { token: "$text-03", role: "Cor de destaque." },
   { token: "$text-inverse", role: "Texto em camadas de alto contraste." },
   { token: "$text-on-color-white", role: "Texto branco sobre cor." },
   { token: "$text-on-color-black", role: "Texto preto sobre cor." },
+];
+
+const FEEDBACK_DEFS = [
+  { token: "$feedback-success-bg", role: "Fundo base do feedback de sucesso." },
+  { token: "$feedback-success-gradient-01", role: "Gradiente do feedback de sucesso." },
+  { token: "$feedback-success-gradient-02", role: "Gradiente do feedback de sucesso." },
+  { token: "$feedback-success-text", role: "Texto do feedback de sucesso." },
+  { token: "$feedback-success-icon", role: "Icone do feedback de sucesso." },
+  { token: "$feedback-error-bg", role: "Fundo base do feedback de erro." },
+  { token: "$feedback-error-gradient-01", role: "Gradiente do feedback de erro." },
+  { token: "$feedback-error-gradient-02", role: "Gradiente do feedback de erro." },
+  { token: "$feedback-error-text", role: "Texto do feedback de erro." },
+  { token: "$feedback-error-icon", role: "Icone do feedback de erro." },
+  { token: "$feedback-warning-bg", role: "Fundo base do feedback de atencao." },
+  { token: "$feedback-warning-gradient-01", role: "Gradiente do feedback de atencao." },
+  { token: "$feedback-warning-gradient-02", role: "Gradiente do feedback de atencao." },
+  { token: "$feedback-warning-text", role: "Texto do feedback de atencao." },
+  { token: "$feedback-warning-icon", role: "Icone do feedback de atencao." },
 ];
 
 const BUTTON_DEFS = [
@@ -137,6 +155,8 @@ function ColorsTab() {
     blue: buildScale("blue", PRIMITIVE_STEPS["blue"]),
     lime: buildScale("lime", PRIMITIVE_STEPS["lime"]),
     cyan: buildScale("cyan", PRIMITIVE_STEPS["cyan"]),
+    orange: buildScale("orange", PRIMITIVE_STEPS["orange"]),
+    pink: buildScale("pink", PRIMITIVE_STEPS["pink"]),
   }), []);
 
   return (
@@ -183,10 +203,12 @@ function ColorsTab() {
         <h2 className="ds-section__title">Complementary Colors</h2>
         <p className="ds-section__subtitle">
           Mini escalas para cores complementares usadas em elementos interativos
-          como odds selecionadas. Lime e Cyan com 5 steps cada.
+          como odds selecionadas. Lime, Cyan, Orange e Pink com 5 steps cada.
         </p>
         <ColorScale name="Lime" steps={scales.lime} />
         <ColorScale name="Cyan" steps={scales.cyan} />
+        <ColorScale name="Orange" steps={scales.orange} />
+        <ColorScale name="Pink" steps={scales.pink} />
       </section>
     </>
   );
@@ -557,31 +579,28 @@ function SpacingTab() {
 }
 
 function TokensTab() {
-  const { groups, scaleMap } = useMemo(() => {
-    const allDefs = [
-      { title: "Background", defs: BACKGROUND_DEFS },
-      { title: "Layer", defs: LAYER_DEFS },
-      { title: "Border", defs: BORDER_DEFS },
-      { title: "Text", defs: TEXT_DEFS },
-      { title: "Button", defs: BUTTON_DEFS },
-    ];
+  const allDefs = [
+    { title: "Background", defs: BACKGROUND_DEFS },
+    { title: "Layer", defs: LAYER_DEFS },
+    { title: "Border", defs: BORDER_DEFS },
+    { title: "Text", defs: TEXT_DEFS },
+    { title: "Feedback", defs: FEEDBACK_DEFS },
+    { title: "Button", defs: BUTTON_DEFS },
+  ];
 
-    const flatDefs = allDefs.flatMap((g) => g.defs);
-    const resolved = resolveSemanticTokens(flatDefs);
+  const flatDefs = allDefs.flatMap((g) => g.defs);
+  const resolved = resolveSemanticTokens(flatDefs);
 
-    let idx = 0;
-    const groups = allDefs.map((g) => {
-      const tokens: TokenRow[] = resolved.slice(idx, idx + g.defs.length);
-      idx += g.defs.length;
-      return { title: g.title, tokens };
-    });
+  let idx = 0;
+  const groups = allDefs.map((g) => {
+    const tokens: TokenRow[] = resolved.slice(idx, idx + g.defs.length);
+    idx += g.defs.length;
+    return { title: g.title, tokens };
+  });
 
-    const scaleMap = buildScaleMap(
-      Object.entries(PRIMITIVE_STEPS) as [string, string[]][],
-    );
-
-    return { groups, scaleMap };
-  }, []);
+  const scaleMap = buildScaleMap(
+    Object.entries(PRIMITIVE_STEPS) as [string, string[]][],
+  );
 
   return (
     <section className="ds-section">
