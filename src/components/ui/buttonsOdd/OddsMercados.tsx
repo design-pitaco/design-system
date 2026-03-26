@@ -85,7 +85,7 @@ export default function OddsMercados({
     .join(" ");
 
   if (type === "escadinha") {
-    const escBg = interactive && selectedIndex === 0 ? "selected" : "color01";
+    const escBg = interactive && selectedIndex === 0 ? "selected" : "color02";
     return (
       <div className={cls}>
         <ButtonOddEscadinha
@@ -97,7 +97,7 @@ export default function OddsMercados({
   }
 
   if (type === "combinada") {
-    const combBg = interactive && selectedIndex === 0 ? "selected" : "color01";
+    const combBg = interactive && selectedIndex === 0 ? "selected" : "color02";
     return (
       <div className={cls}>
         <div className="odds-mercados__ver-todos">
